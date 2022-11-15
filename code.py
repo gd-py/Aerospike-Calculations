@@ -29,8 +29,9 @@ m = 1.6 # kg, mass of propellent
 g = 9.81
 
 ## Combustion Chamber Conditions
-P_0 = 3447380 # Pa, (= 500 PSI)
-T_0 = 1100 # Kelvin
+P_0 = 600 # PSI
+P_0 *= 6894.75729 # Pa
+T_0 = 1900 # Kelvin
 rho_0 = P_0/(R*T_0)
 
 ## Ambient Conditions at altitude of 10k feet
@@ -77,6 +78,7 @@ print("Total Impulse: ", I)
 print("Specific Impulse: ", Isp)
 
 print(V_t)
+
 
 
 
