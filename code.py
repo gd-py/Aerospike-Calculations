@@ -29,10 +29,11 @@ m = 1.6 # kg, mass of propellent
 g = 9.81
 
 ## Combustion Chamber Conditions
-P_0 = 600 # PSI
+P_0 = 700 # PSI
 P_0 *= 6894.75729 # Pa
 T_0 = 1900 # Kelvin
 rho_0 = P_0/(R*T_0)
+print("P_0: ", P_0, "\nT_0: ", T_0)
 
 ## Ambient Conditions at altitude of 10k feet
 h = 10000
@@ -76,8 +77,8 @@ Isp = Veq/g
 print("Thrust: ", F)
 print("Total Impulse: ", I)
 print("Specific Impulse: ", Isp)
-
-print(V_t)
+print("Mass Flow Rate: ", m_dot)
+print("Velocity at throat: ", V_t)
 
 
 
