@@ -55,6 +55,10 @@ Me = [i for i in isen.M(A_Astar=Exp_ratio) if i>1][0] # Exit Mach Number
 
 rhot_rho0 = isen.rho_rho0(M=1) # ratio of density at throat to density at chamber # At throat, M = 1
 rhot = rho_0 * rhot_rho0 # density at throat
+Tt_T0 = isen.calculate(M=1)['T_T0'][0]
+T_t = T_0*Tt_T0
+P_t = rhot*R*T_t
+print("Pressure at throat: ", P_t)
 
 m_dot = rhot*A_t*V_t # mass flow rate
 
@@ -79,6 +83,8 @@ print("Total Impulse: ", I)
 print("Specific Impulse: ", Isp)
 print("Mass Flow Rate: ", m_dot)
 print("Velocity at throat: ", V_t)
+print("Pressure at exit: ", P_e)
+# print("Pressure at throat: ", P)
 
 
 
