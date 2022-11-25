@@ -29,7 +29,7 @@ m = 1.6 # kg, mass of propellent
 g = 9.81
 
 ## Combustion Chamber Conditions
-P_0 = 600 # PSI
+P_0 = 700 # PSI
 P_0 *= 6894.75729 # Pa
 T_0 = 1900 # Kelvin
 rho_0 = P_0/(R*T_0)
@@ -61,7 +61,7 @@ P_t = rhot*R*T_t
 print("Pressure at throat: ", P_t)
 
 m_dot = rhot*A_t*V_t # mass flow rate
-
+print("m_dot: ", m_dot)
 # Conditions at nozzle exit
 Pe_P0 = isen.p_p0(M=Me)
 P_e = Pe_P0*P_0 # Pressure at exit
@@ -77,6 +77,12 @@ F = m_dot*V_e + (P_e-P_a)*A_e # Thrust given by nozzle
 Veq = V_e + (P_e - P_a)*A_e/m_dot # Equivalent velocity, look Ref. 3 for more
 I = m*Veq # Total Impulse
 Isp = Veq/g
+
+Pt_P0 = isen.p_p0(M=1)
+choked_Pt_P0 = (2/(k+1))**(k/(k-1))
+
+# print("Actual Pt/P0: ", Pt_P0)
+# print("Pt/P0 required for choked flow: ", choked_Pt_P0)
 
 print("Thrust: ", F)
 print("Total Impulse: ", I)
