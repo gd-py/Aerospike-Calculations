@@ -29,7 +29,12 @@ m = 1.6 # kg, mass of propellent
 g = 9.81
 
 ## Combustion Chamber Conditions
-P_0 = 410 # PSI
+P_0 = 600 # Enter value in PSI
+P_0 *= 6894.76 # Convert to Pa
+T_0 = 1100 # Kelvin
+rho_0 = P_0/(R*T_0)
+print("P_0: ", P_0)
+P_0 = 700 # PSI
 P_0 *= 6894.75729 # Pa
 T_0 = 1100 # Kelvin
 rho_0 = P_0/(R*T_0)
@@ -93,6 +98,7 @@ print("Specific Impulse: ", Isp)
 print("Mass Flow Rate: ", m_dot)
 print("Velocity at throat: ", V_t)
 print("Pressure at exit: ", P_e)
+print("Equivalent velocity: ", Veq)
 # print("Pressure at throat: ", P)
 
 
