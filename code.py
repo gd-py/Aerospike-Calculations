@@ -7,10 +7,10 @@ from caeroc.formulae.isentropic import Isentropic
 def tAlt(h):
     return 15.04-0.00649*h
 
-# Insert height in feet. Returns pressure in K-Pa
+# Insert height in feet. Returns pressure in Pa
 def pAlt(h):
     h *= 0.3048
-    return 101.29*((tAlt(h)+273.1)/288.08)**5.256
+    return 101.29e3*((tAlt(h)+273.1)/288.08)**5.256
 
 ## Conversion factor
 # (ft.lbf/(lbm.R)) to (kJ/(kg.K)), This can be used for both specific heat conversion and specific gas constant conversion as R = Cp-Cv
@@ -29,14 +29,9 @@ m = 1.6 # kg, mass of propellent
 g = 9.81
 
 ## Combustion Chamber Conditions
-P_0 = 600 # Enter value in PSI
-P_0 *= 6894.76 # Convert to Pa
-T_0 = 1100 # Kelvin
-rho_0 = P_0/(R*T_0)
-print("P_0: ", P_0)
-P_0 = 700 # PSI
+P_0 = 410 # PSI
 P_0 *= 6894.75729 # Pa
-T_0 = 1900 # Kelvin
+T_0 = 1100 # Kelvin
 rho_0 = P_0/(R*T_0)
 print("P_0: ", P_0, "\nT_0: ", T_0)
 
@@ -44,12 +39,13 @@ print("P_0: ", P_0, "\nT_0: ", T_0)
 h = 10000
 P_a = pAlt(h) # Pa, (= 10,000ft pressure altitude)
 T_a = 273 + tAlt(h) # Kelvin, (= -4.8 deg Celcius)
+print("Ambient Conditions; Pressure: ", P_a, "| Temperature: ", T_a)
 
 gamma = k
 
 ## These values are taken from simulation of Ref. 2
 A_t = 0.00029532 # m^2, Throat Area
-R_e = 0.0237 # m, Exit radius
+R_e = 0.020 # m, Exit radius
 A_e = np.pi*R_e**2 # m^2, Exit area
 Exp_ratio = 6 # Expansion Ratio
 
@@ -64,6 +60,7 @@ Tt_T0 = isen.calculate(M=1)['T_T0'][0]
 T_t = T_0*Tt_T0
 P_t = rhot*R*T_t
 print("Pressure at throat: ", P_t)
+print("Temperature at throat: ", T_t)
 
 m_dot = rhot*A_t*V_t # mass flow rate
 print("m_dot: ", m_dot)
@@ -73,6 +70,7 @@ P_e = Pe_P0*P_0 # Pressure at exit
 
 Te_T0 = isen.T_T0(M=Me)
 Te = Te_T0*T_0 # Temperature at exit
+print("Temperature at exit: ", Te)
 
 a_e = np.sqrt(gamma*R*Te) # Sound speed at exit
 V_e = Me*a_e
